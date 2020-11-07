@@ -54,7 +54,7 @@ export default {
   },
   proxy: {
     // eslint-disable-next-line standard/object-curly-even-spacing
-    '/api': { target: process.env.YOUTUBE_API_URL, pathRewrite: { '^/api/': '' }, changeOrigin: true }
+    '/youtubeApi': { target: process.env.YOUTUBE_API_URL, pathRewrite: { '^/api/': '' }, changeOrigin: true }
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
