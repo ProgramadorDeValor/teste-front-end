@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
-require('dotenv').config()
-const isDev = process.env.NODE_ENV === 'development'
+// require('dotenv').config()
+// const isDev =
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '@plugins/axios-accessor'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -37,6 +38,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/dotenv',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify'
   ],
@@ -54,7 +56,11 @@ export default {
   },
   proxy: {
     // eslint-disable-next-line standard/object-curly-even-spacing
-    '/youtubeApi': { target: process.env.YOUTUBE_API_URL, pathRewrite: { '^/api/': '' }, changeOrigin: true }
+    '/youtubeApi': {
+      target: process.env.YOUTUBE_API_URL,
+      pathRewrite: { '^/youtubeApi/': '' },
+      changeOrigin: true
+    }
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
