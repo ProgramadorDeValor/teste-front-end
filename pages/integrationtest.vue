@@ -188,7 +188,7 @@ export default class Integrationtest extends Vue {
   sortBy = 'name';
   keys = [];
   youtubeApi = getModule(youtubeapi, this.$store)
-  youtubeData: YoutubeResponseApi = null
+  youtubeData: YoutubeResponseApi|null = null
 
   async mounted () {
     let result = await this.youtubeApi.queryByTextApiData('carro azul')

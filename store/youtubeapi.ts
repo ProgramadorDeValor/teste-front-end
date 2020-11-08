@@ -1,6 +1,5 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators'
 import { $axios } from '~/utils/axiosApi'
-// import getEnvVariables from '~/utils/envReader'
 import { Youtube, YoutubeParams } from '~/types/Youtube/Interfaces/Youtube'
 import { YoutubeParamClass } from '~/types/Youtube/Classes/YoutubeParamClass'
 import { YoutubeResponseApi } from '~/types/Youtube/Classes/YoutubeResponseApi'
