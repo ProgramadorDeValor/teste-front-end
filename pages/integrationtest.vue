@@ -73,7 +73,7 @@
           >
             <v-card>
               <v-card-title class="subheading font-weight-bold">
-                {{ item.name }}
+                {{ item.snippet.title }}
               </v-card-title>
 
               <v-divider />
@@ -170,13 +170,14 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { getModule } from 'vuex-module-decorators'
 import youtubeapi from '../store/youtubeapi'
+import { YoutubeResponseApi } from '~/types/Youtube/Classes/YoutubeResponseApi'
 
 @Component
 export default class Integrationtest extends Vue {
   // name: 'Integrationtest',
 
   // Data method
-  items = [];
+  // items = [];
   itemPerPage = 10;
   itemsPerPageArray = [4, 8, 12];
   search = '';
@@ -187,10 +188,12 @@ export default class Integrationtest extends Vue {
   sortBy = 'name';
   keys = [];
   youtubeApi = getModule(youtubeapi, this.$store)
+  youtubeData: YoutubeResponseApi = null
 
-  mounted () {
-    let result = this.youtubeApi.queryApiData('carro azul')
-    console.log(result)
+  async mounted () {
+    let result = await this.youtubeApi.queryByTextApiData('carro azul')
+    this.youtubeData = result.YoutubeData
+    // this.items = this.youtubeData.YoutubeData?.items
   }
 
   //  computed: {
@@ -200,6 +203,10 @@ export default class Integrationtest extends Vue {
 
   get filteredKeys () {
     return this.keys.filter(key => key !== 'Name')
+  }
+
+  get items () {
+    return this.youtubeData ? this.youtubeData.items : []
   }
 
   // Methods
