@@ -14,12 +14,12 @@ export default class YoutubeapiModule extends VuexModule {
   async sendSearchDataToApi (params: YoutubeParams): Promise<YoutubeResponseApi> {
     return $axios.$get('/youtubeApi/search', { params })
       .then((res) => {
-        let result = new YoutubeResponseApi(true)
+        let result = new YoutubeResponseApi(true, params.q)
         result.YoutubeData = <Youtube> res
         return result
       })
       .catch((e) => {
-        let result = new YoutubeResponseApi(false)
+        let result = new YoutubeResponseApi(false, params.q)
         result.erroObj = e
         result.errorMessage = e.data.errorMessage
         return result
@@ -32,8 +32,17 @@ export default class YoutubeapiModule extends VuexModule {
   }
 
   @Action
-  async queryByTextApiData (searchQuery: string): Promise<YoutubeResponseApi> {
+  async queryByTextApiData (searchQuery: string, maxResults: number = 6): Promise<YoutubeResponseApi> {
     let param = new YoutubeParamClass(searchQuery)
+    param.maxResults = maxResults
+    return this.queryByParamApiData(param)
+  }
+
+  @Action
+  async queryNextPage ([searchQuery = '', nextPageId = '', maxResults = 6]) : Promise<YoutubeResponseApi> {
+    let param = new YoutubeParamClass(searchQuery)
+    param.pageToken = nextPageId
+    param.maxResults = maxResults
     return this.queryByParamApiData(param)
   }
 }

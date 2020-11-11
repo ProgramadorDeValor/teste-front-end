@@ -4,7 +4,7 @@ export class YoutubeParamClass implements YoutubeParams {
   public channelId?: string;
   public channelType?: string;
   public eventType?: string;
-  public maxResults?: number;
+  public maxResults?: number = 6;
   public onBehalfOfContentOwner?: string;
   public order?: string;
   public pageToken?: string;

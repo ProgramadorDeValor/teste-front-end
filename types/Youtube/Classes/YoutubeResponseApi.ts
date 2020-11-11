@@ -6,7 +6,8 @@ export class YoutubeResponseApi {
   public erroObj : object | undefined;
 
   constructor (
-    public success : boolean
+    public success : boolean,
+    public queryText:string
   ) {
   }
 }

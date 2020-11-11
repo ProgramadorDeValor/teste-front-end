@@ -33,10 +33,11 @@
 </style>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Item } from '~/types/Youtube/Interfaces/Youtube'
 
 @Component
 export default class YoutubeVideoCard extends Vue {
-  @Prop(Object) readonly item: Object
+  @Prop({ required: true }) readonly item!: Item
 
   // Computed
   get itemTitle () {

@@ -7,6 +7,7 @@
     hide-details
     append-icon="mdi-magnify"
     label="Digite para Pesquisar um video"
+    @click:clear="emitClear"
   />
 </template>
 <style scoped>
@@ -26,17 +27,20 @@ export default class SearchBar extends Vue {
   youtubeData: YoutubeResponseApi|null = null
   isLoading: boolean = false
   search: string = ''
-  timeoutVal: number = null
+  timeoutVal: any = null
   timeToWaitBeforeSearch: number = 700
 
   // Methods
   async executeQuery (text: string) {
+    if (!text || text.trim().length < 1)
+      return
+
     this.isLoading = true
     this.youtubeApi.queryByTextApiData(text)
       .then((res) => {
         if (res.success) {
           this.$emit('success', true)
-          this.$emit('result', res.YoutubeData)
+          this.$emit('result', res)
         }
       })
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,6 +50,10 @@ export default class SearchBar extends Vue {
       .finally(() => {
         this.isLoading = false
       })
+  }
+
+  emitClear () {
+    this.$emit('cleared', true)
   }
 
   @Watch('search')
