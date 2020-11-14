@@ -22,8 +22,8 @@ export class YoutubeParamClass implements YoutubeParams {
   public videoLicense?: string;
   public videoSyndicated?: string;
   public videoType?: string;
-  public part: string = 'id,snippet'
-  public key: string = ''
+  public part: string = 'id,snippet';
+  public key: string = '';
 
   constructor (
     public q: string

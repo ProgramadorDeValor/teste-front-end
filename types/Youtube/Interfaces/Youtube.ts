@@ -75,6 +75,8 @@ export interface Thumbnails {
   default: Default;
   medium: Medium;
   high: High;
+  standard?: Standard;
+  maxres?: Maxres;
 }
 
 export interface Default {
@@ -93,4 +95,89 @@ export interface High {
   url: string;
   width: number;
   height: number;
+}
+
+export interface Standard {
+  url: string;
+  width: number;
+  height: number;
+}
+
+export interface Maxres {
+  url: string;
+  width: number;
+  height: number;
+}
+
+export interface YoutubeVideoParams {
+  part: string;
+  chart?: string;
+  id: string;
+  myRating?: string;
+  maxResults?: number;
+  onBehalfOfContentOwner?: string;
+  pageToken?: string;
+  regionCode?: string;
+  videoCategoryId?: string;
+  key: string;
+}
+
+export interface YoutubeVideoData {
+  kind: string;
+  etag: string;
+  pageInfo: PageInfo;
+  items: VideoItem[];
+}
+
+export interface ContentRating {
+}
+
+export interface ContentDetails {
+  duration: string;
+  dimension: string;
+  definition: string;
+  caption: string;
+  licensedContent: boolean;
+  contentRating: ContentRating;
+  projection: string;
+}
+export interface Statistics {
+  viewCount: string;
+  likeCount: string;
+  dislikeCount: string;
+  favoriteCount: string;
+  commentCount: string;
+}
+
+export interface Player {
+  embedHtml: string;
+}
+
+export interface Localized {
+  title: string;
+  description: string;
+}
+
+export interface SnippetVideo {
+  publishedAt: Date;
+  channelId: string;
+  title: string;
+  description: string;
+  thumbnails: Thumbnails;
+  channelTitle: string;
+  tags: string[];
+  categoryId: string;
+  liveBroadcastContent: string;
+  localized: Localized;
+  defaultAudioLanguage: string;
+}
+
+export interface VideoItem {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: SnippetVideo;
+  contentDetails: ContentDetails;
+  statistics: Statistics;
+  player: Player;
 }
